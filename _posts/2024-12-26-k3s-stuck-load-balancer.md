@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Troubleshooting broken K3s api access
-date: 2024-12-26T10:42:20.305Z
+date: 2024-12-26T10:00:00.305Z
 nobanner: "yes"
 fb-img: null
 ---
