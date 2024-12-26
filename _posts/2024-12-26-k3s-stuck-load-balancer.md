@@ -52,6 +52,7 @@ clusters:
     server: https://192.168.1.233:6446
   name: default
 ...
+```
 
 At this point I could use kubectl again to try and troubleshoot further.
 
