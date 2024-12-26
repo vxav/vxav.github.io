@@ -21,13 +21,13 @@ In order to gain access back temporarily, I changed the default port from 6443 t
 - Stop the `k3s` service.
 
 ```
-systemctl stop k3s`
+$ systemctl stop k3s`
 ```
 
 - Edit the K3s service to use a different port.
 
 ```
-vi /etc/systemd/system/k3s.service
+$ vi /etc/systemd/system/k3s.service
 
 ...
 ExecStart=/usr/local/bin/k3s \
@@ -37,13 +37,13 @@ ExecStart=/usr/local/bin/k3s \
 - Restart the `k3s` service.
 
 ```
-systemctl start k3s`
+$ systemctl start k3s`
 ```
 
 - Modify the kubeconfig on my machine to target the new port.
 
 ```
-vi $KUBECONFIG
+$ vi $KUBECONFIG
 
 apiVersion: v1
 clusters:
@@ -66,7 +66,7 @@ At this point, nothing was listening on port 6443. Even if I manually listened o
 Here I look for rules with 6443 and grep previous lines to find which [chain](https://unix.stackexchange.com/questions/506729/what-is-a-chain-in-iptables) they are in. 
 
 ```
-> nft list ruleset | grep 6443 -B10
+$ nft list ruleset | grep 6443 -B10
 
 ...
 	chain KUBE-SEP-MKZ5TTJEI3R5D5SV {
@@ -85,7 +85,7 @@ The first rule in the `KUBE-SEP-MKZ5TTJEI3R5D5SV` chain didn't bother me but the
 - Delete all rules in the `CNI-DN-3499088e1adba268a4e0c` chain.
 
 ```
-> nft flush chain nat CNI-DN-3499088e1adba268a4e0c
+$ nft flush chain nat CNI-DN-3499088e1adba268a4e0c
 ```
 
 After I did that, the K3s API started responding again on 6443, awesome. Yet I thought I would reboot the machine just to make sure. After a reboot, the rule was back in and "blocking" traffic to 6443 so something is recreating it.
@@ -93,7 +93,7 @@ After I did that, the K3s API started responding again on 6443, awesome. Yet I t
 I quickly checked the nftables config just to make sure but, as expected, nothing is in it.
 
 ```
-cat /etc/nftables.conf
+$ cat /etc/nftables.conf
 
 #!/usr/sbin/nft -f
 
@@ -115,7 +115,7 @@ table inet filter {
 - I checked in Kubernetes for the pod associated with the service and it was back indeed. I tailed the logs of that service and the answer was right there. 
 
 ```
-> kubectl logs -n kube-system                 svclb-kubeapi-loadbalancer-8e92d16f-htf6q
+$ kubectl logs -n kube-system                 svclb-kubeapi-loadbalancer-8e92d16f-htf6q
 
 [INFO]  nft mode detected
 + trap exit TERM INT
@@ -153,14 +153,14 @@ In the default implementation of K3s, when you create a service of type load bal
 - Check where this pod is created from and delete the resource.
 
 ```
-> kubectl describe pod -n kube-system svclb-kubeapi-loadbalancer-8e92d16f-htf6q | grep -i "controlled"
+$ kubectl describe pod -n kube-system svclb-kubeapi-loadbalancer-8e92d16f-htf6q | grep -i "controlled"
 Controlled By:  DaemonSet/svclb-kubeapi-loadbalancer-8e92d16f
 ```
 
 - Delete the `daemonset`.
 
 ```
-> kubectl delete ds -n kube-system svclb-kubeapi-loadbalancer-8e92d16f
+$ kubectl delete ds -n kube-system svclb-kubeapi-loadbalancer-8e92d16f
 daemonset.apps "svclb-kubeapi-loadbalancer-8e92d16f" deleted
 ```
 
