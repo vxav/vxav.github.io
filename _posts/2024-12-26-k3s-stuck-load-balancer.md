@@ -3,7 +3,7 @@ layout: post
 title: Troubleshooting broken K3s api access
 date: 2024-12-26T10:00:00.305Z
 nobanner: "yes"
-fb-img: null
+fb-img: /img/k3s-iptables-fb-img.png
 ---
 
 While I work with vanilla Kubernetes (K8s) in my day job, I run a single node K3s cluster at home for my personal services like Home Assistant, Z2M, Unifi controller and so on. I mentioned this setup a little bit in [this blog](2024-03-30-argo-events-and-renovate.md). Just like Kubernetes, the default port for the K3s API is 6443, which is exposed by the `k3s` service. 
