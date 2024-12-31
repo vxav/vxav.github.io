@@ -6,7 +6,7 @@ nobanner: "yes"
 fb-img: /img/k3s-iptables-fb-img.png
 ---
 
-While I work with vanilla Kubernetes (K8s) in my day job, I run a single node K3s cluster at home for my personal services like Home Assistant, Z2M, Unifi controller and so on. I mentioned this setup a little bit in [this blog](2024-03-30-argo-events-and-renovate.md). Just like Kubernetes, the default port for the K3s API is 6443, which is exposed by the `k3s` service. 
+While I work with vanilla Kubernetes (K8s) in my day job, I run a single node K3s cluster at home for my personal services like Home Assistant, Z2M, Unifi controller and so on. I mentioned this setup a little bit in [this blog](/2024-03-30-argo-events-and-renovate). Just like Kubernetes, the default port for the K3s API is 6443, which is exposed by the `k3s` service. 
 
 Now while working on bare metal stuff, I wanted a quick way to load balance 6443 to another Kubernetes cluster so I created an endpoint with a LAN IP and created a load balancer service on 6443 targetting this endpoint... I then lost access to the K3s API and that was a big facepalm moment. The service took over 6443 in place of the K3s service.
 
