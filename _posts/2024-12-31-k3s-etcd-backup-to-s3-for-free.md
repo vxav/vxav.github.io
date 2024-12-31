@@ -3,7 +3,7 @@ layout: post
 title: K3s etcd backup to S3 for free
 date: 2024-12-31T10:00:00.305Z
 nobanner: "yes"
-fb-img: /img/k3s-iptables-fb-img.png
+fb-img: /img/backblaze-free-real-estate.png
 ---
 
 The [incident I had recently](2024-12-26-k3s-stuck-load-balancer.md) highlighted to me that I never set up regular backups of the Kubernetes datastore of my home K3s single-node cluster. As a result I converted K3s to use embedded etcd instead of the default SQLite as datastore backend, which allows me to configure backups (snapshots) of etcd to an S3 bucket. 
