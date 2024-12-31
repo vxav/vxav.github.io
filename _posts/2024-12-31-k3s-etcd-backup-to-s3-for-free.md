@@ -18,27 +18,29 @@ When looking for S3 compatible endpoint providers, I looked at a few different o
 
 - First create an account on [Backblaze B2 cloud storage](https://www.backblaze.com/sign-up/cloud-storage?referrer=getstarted). I chose the "EU Central" region since I am in France.
 
-![backblaze account](backblaze-1.png)
+![backblaze account](/img/backblaze-1.png)
 
 - Once you are logged into your account, go to `B2 Cloud Storage > Buckets > Create a Bucket`.
 
-![backblaze bucket](backblaze-2.png)
+![backblaze bucket](/img/backblaze-2.png)
 
 - Give it a sensible name, and configure it as you see fit. I made it private, encrypted and immutable since it will store etcd snapshots.
 
-![backblaze bucket config](backblaze-3.png)
+![backblaze bucket config](/img/backblaze-3.png)
 
 - Then head to `Application Keys > Add a New Application Key`.
 
-![backblaze app key](backblaze-5.png)
+![backblaze app key](/img/backblaze-5.png)
 
 - Give it a sensible name, select the name of the bucket we created with `Read and Write` access.
 
-![backblaze app key create](backblaze-6.png)
+![backblaze app key create](/img/backblaze-6.png)
 
 - Save the following fields somewhere safe (lastpass, onepassword...) as it will only appear once.
   - `keyID` is the S3 `access key`
   - `applicationKey` is the S3 `secret key`
+
+![backblaze secrets](/img/backblaze-7.png)
 
 ## Create the S3 secret in Kubernetes
 
@@ -83,7 +85,7 @@ systemctl restart k3s
 
 Now you should start seeing new files in your bucket every day.
 
-![backblaze files](backblaze-8.png)
+![backblaze files](/img/backblaze-8.png)
 
 You can also test manually from the `k3s` command line:
 
