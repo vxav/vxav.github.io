@@ -6,7 +6,7 @@ nobanner: "yes"
 fb-img: /img/backblaze-free-real-estate.png
 ---
 
-The [incident I had recently](/_posts/2024-12-26-k3s-stuck-load-balancer.md) highlighted to me that I never set up regular backups of the Kubernetes datastore of my home K3s single-node cluster. As a result I converted K3s to use embedded etcd instead of the default SQLite as datastore backend, which allows me to configure backups (snapshots) of etcd to an S3 bucket. 
+The [incident I had recently](/2024-12-26-k3s-stuck-load-balancer) highlighted to me that I never set up regular backups of the Kubernetes datastore of my home K3s single-node cluster. As a result I converted K3s to use embedded etcd instead of the default SQLite as datastore backend, which allows me to configure backups (snapshots) of etcd to an S3 bucket. 
 
 If your K3s doesn't use etcd as a datastore yet, you can convert it simply by adding the `--cluster-init` flag to the config file. [Documentation here](https://docs.k3s.io/datastore/ha-embedded#existing-single-node-clusters).
 
