@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Tailscale subnet router on Kubernetes with ArgoCD and Tailscale Operator
-date: 2025-03-15:00:00.305Z
+date: 2025-03-14T15:00:00.305Z
 nobanner: "yes"
 ---
 
